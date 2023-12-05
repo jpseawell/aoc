@@ -13,3 +13,15 @@ export const readLinesFromFile = (
     return [];
   }
 };
+
+export const readFromFile = (
+  dir: string,
+  relativePath: string
+): string | undefined => {
+  try {
+    const absolutePath = path.resolve(dir, relativePath);
+    return fs.readFileSync(absolutePath, "utf-8");
+  } catch (err) {
+    console.error("Error reading the file:", err);
+  }
+};
