@@ -1,4 +1,4 @@
-import { readLinesFromFile } from "../utils";
+import { readLinesFromFile } from "./utils";
 
 //// Day 3: Gear Ratios
 // Pt. I

@@ -1,4 +1,4 @@
-import { readLinesFromFile } from "../utils";
+import { readLinesFromFile } from "./utils";
 
 //// Day 2: Cube Conundrum
 

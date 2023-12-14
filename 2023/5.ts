@@ -1,10 +1,10 @@
 /// Day 5: If You Give A Seed A Fertilizer
 
-import { testInput } from "./testInput";
+import { testInput } from "./day-5-test-input";
 
-import { readFromFile } from "../utils";
+import { readFromFile } from "./utils";
 
-const fileInput = readFromFile(__dirname, "input.txt");
+const fileInput = readFromFile(__dirname, "day-5.txt");
 if (!fileInput) throw new Error("Error parsing file input.");
 
 // Pt. I

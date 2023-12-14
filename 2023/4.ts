@@ -1,6 +1,6 @@
 //// Day 4: Scratchcards
 
-import { readLinesFromFile } from "../utils";
+import { readLinesFromFile } from "./utils";
 
 // Pt. I
 const testInput = [
