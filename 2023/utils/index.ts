@@ -25,3 +25,5 @@ export const readFromFile = (
     console.error("Error reading the file:", err);
   }
 };
+
+export type StringMap = { [key: string]: number };
