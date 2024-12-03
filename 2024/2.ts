@@ -41,56 +41,42 @@ const solution_part_1 = (reports: number[][]) => {
   console.log({ totalSafeReports });
 };
 
-const validDiff = (levelA: number, levelB: number, increasing: boolean) => {
-  const diff = levelA - levelB;
-  if (isNaN(diff)) return false;
-  if (increasing && diff > 0) return false;
-  if (!increasing && diff < 0) return false;
-  if (Math.abs(diff) > 3) return false;
-  if (Math.abs(diff) < 1) return false;
+const isSafeReport = (report: number[]) => {
+  const direction = Math.sign(report[1] - report[0]);
 
-  return true;
-};
+  for (let i = 1; i < report.length; i++) {
+    const delta = report[i] - report[i - 1];
 
-const findBadLevels = (report: number[]) => {
-  const increasing = report[0] < report[1];
-  const badLevels: number[] = [];
+    if (Math.abs(delta) < 1 || Math.abs(delta) > 3) {
+      return false;
+    }
 
-  for (let j = 0; j < report.length - 1; j++) {
-    if (!validDiff(report[j], report[j + 1], increasing)) {
-      badLevels.push(j);
+    if (direction * delta <= 0) {
+      return false;
     }
   }
 
-  return badLevels;
+  return true;
 };
 
 const solution_part_2 = (reports: number[][]) => {
   let totalSafeReports = 0;
 
-  for (let i = 0; i < reports.length; i++) {
-    const report = reports[i];
-
-    const badLevels = findBadLevels(report);
-
-    if (badLevels.length === 0) {
+  for (const report of reports) {
+    if (isSafeReport(report)) {
       totalSafeReports++;
       continue;
     }
 
-    console.log({ report, badLevels });
-    let fixables = 0;
-    for (const badLevel of badLevels) {
-      const dampenedReport = report.filter((_, idx) => idx !== badLevel);
-      const dampenedBadLevels = findBadLevels(dampenedReport);
+    for (let i = 0; i < report.length; i++) {
+      // remove the element at index i
+      const newReport = report.slice(0, i).concat(report.slice(i + 1));
 
-      console.log({ dampenedReport, dampenedBadLevels });
-      if (dampenedBadLevels.length === 0) {
-        fixables++;
+      if (isSafeReport(newReport)) {
+        totalSafeReports++;
+        break;
       }
     }
-
-    if (fixables === 1) totalSafeReports++;
   }
 
   console.log({ totalSafeReports });
